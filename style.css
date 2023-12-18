@@ -1,0 +1,111 @@
+body{
+    height:100vh;
+    
+    
+    background:url('https://wallpapers.com/images/hd/gmail-background-c58nnalcxkqn1pt7.jpg');
+
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    backdrop-filter:blur(20px) brightness(200%);
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+.h1{
+    font-size: 2em;
+    font-weight: bolder;
+    text-decoration: underline;
+    color: black;
+}
+  .window{
+    width:200px;
+    height:380px;
+    padding:40px;
+    text-align:center;
+    border:1px solid black;
+    border-radius:20px;
+    justify-content:center;
+    align-items:center;
+    backdrop-filter:blur(20px) brightness(200%);
+    position: relative;
+    left:700px;
+    top:200px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+  }
+  input[type="email"], input[type="password"] ,input[type="text"]{
+    border-radius:10px;
+    border:1px solid black;
+    color:white !important;
+    font-family: monospace;
+    font-weight: bold;
+    background-color: red;
+    width: 250px;
+    height: 25px;
+    background-size:cover;
+    background-position:center;
+  }
+ 
+  input[type="email"]::placeholder, input[type="password"]::placeholder,input[type="text"]::placeholder{
+    color:white;
+  }
+  input[type="submit"]{
+    width:50%;
+    border-radius:8px;
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size:14px;
+
+  }
+
+.container {
+    width:200px;
+    height:380px;
+    padding:40px;
+    text-align:center;
+    border:1px solid black;
+    border-radius:20px;
+    justify-content:center;
+    align-items:center;
+    backdrop-filter:blur(20px) brightness(200%);
+    position: relative;
+    left:700px;
+    top:200px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+h2 {
+    color: black;
+}
+button {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

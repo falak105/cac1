@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail-Like Email List</title>
+    <style>
+        /* Styles as before */
+
+        .email-details-page {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: black;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .back-btn {
+            background-color: ;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #333;
+        }
+
+        header {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: red;
+            padding: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-bar {
+            width: 70%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .compose-btn {
+            background-color: red;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .compose-box {
+            display: none;
+            background-color: black;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            position: relative;
+        }
+
+        .close-btn {
+            background-color:red;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            display: inline-block;
+            text-decoration: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .compose-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .compose-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        .compose-form input,
+        .compose-form textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .compose-form button {
+            background-color: red;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .email-list {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .email-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .email-details {
+            flex: 1;
+            margin-right: 15px;
+        }
+
+        .email-subject {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .email-sender,
+        .email-date {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .view-btn {
+            background-color: red;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .email-details-page {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .back-btn {
+            background-color: red;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+    </style>
+        <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Gmail</h1>
+    </header>
+    <ul>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="mail.html">Mail</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+    <nav>
+        <input type="text" class="search-bar" placeholder="Search...">
+        <button class="compose-btn" onclick="toggleComposeBox()">Compose</button>
+    </nav>
+
+    <div class="overlay" id="overlay" onclick="closeComposeBox()"></div>
+
+    <div class="compose-box" id="composeBox">
+        <button class="close-btn" onclick="closeComposeBox()">Close</button>
+        <div class="compose-header">
+            <h2>Compose Email</h2>
+        </div>
+        <div class="compose-form">
+            <form id="emailForm" onsubmit="sendEmail(); return false;">
+                <label for="recipient">To:</label>
+                <input type="text" id="recipient" name="recipient" placeholder="Recipient" required>
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Type your message here..." rows="8" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="email-list" id="emailList">
+        <!-- JavaScript will populate this section -->
+    </div>
+
+    <script>
+        function toggleComposeBox() {
+            var composeBox = document.getElementById('composeBox');
+            var overlay = document.getElementById('overlay');
+
+            if (composeBox.style.display === 'none' || composeBox.style.display === '') {
+                composeBox.style.display = 'block';
+                overlay.style.display = 'flex';
+            } else {
+                closeComposeBox();
+            }
+        }
+
+        function closeComposeBox() {
+            var composeBox = document.getElementById('composeBox');
+            var overlay = document.getElementById('overlay');
+
+            composeBox.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function sendEmail() {
+            var recipient = document.getElementById('recipient').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+
+            console.log('Sending email to:', recipient);
+            console.log('Subject:', subject);
+            console.log('Message:', message);
+
+            document.getElementById('recipient').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('message').value = '';
+
+            closeComposeBox();
+
+            // For demonstration purposes, update the email list with the sent email
+            var emailList = document.getElementById('emailList');
+            var emailItem = document.createElement('div');
+            emailItem.className = 'email-item';
+            emailItem.innerHTML = `
+                <div class="email-details">
+                    <p class="email-subject">${subject}</p>
+                    <p class="email-sender">${recipient}</p>
+                </div>
+                <span class="email-date">${new Date().toLocaleString()}</span>
+                <button class="view-btn" onclick="openEmailDetails('${recipient}', '${subject}', '${message}')">View</button>
+            `;
+            emailList.insertBefore(emailItem, emailList.firstChild);
+        }
+
+        function openEmailDetails(recipient, subject, message) {
+            var emailWindow = window.open('', '_blank');
+            emailWindow.document.write(`
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Email Details</title>
+                    <style>
+                        /* Styles as before */
+                    </style>
+                </head>
+                <body>
+                    <div class="email-details-page">
+                        <h2>Email Details</h2>
+                        <p><strong>Recipient:</strong> ${recipient}</p>
+                        <p><strong>Subject:</strong> ${subject}</p>
+                        <p><strong>Message:</strong> ${message}</p>
+                        <a class="back-btn" href="javascript:window.close();">Back to Email List</a>
+                    </div>
+                </body>
+                </html>
+            `);
+            emailWindow.document.close();
+        }
+
+        function populateEmailList() {
+            var emailList = document.getElementById('emailList');
+
+            // Sample emails
+            var emails = [
+                { id: 1, subject: 'Meeting Tomorrow', sender: 'john.doe@example.com', date: '2023-01-15', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+                { id: 2, subject: 'Project Update', sender: 'jane.smith@example.com', date: '2023-01-14', message: 'Nulla facilisi. Sed ut metus vel metus varius fringilla.' },
+                { id: 3, subject: 'Important Announcement', sender: 'admin@example.com', date: '2023-01-13', message: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.' },
+            ];
+
+            emails.forEach(function(email) {
+                var emailItem = document.createElement('div');
+                emailItem.className = 'email-item';
+                emailItem.innerHTML = `
+                    <div class="email-details">
+                        <p class="email-subject">${email.subject}</p>
+                        <p class="email-sender">${email.sender}</p>
+                    </div>
+                    <span class="email-date">${new Date(email.date).toLocaleDateString()}</span>
+                    <button class="view-btn" onclick="openEmailDetails('${email.sender}', '${email.subject}', '${email.message}')">View</button>
+                `;
+                emailList.appendChild(emailItem);
+            });
+        }
+
+        populateEmailList();
+    </script>
+</body>
+</html>
